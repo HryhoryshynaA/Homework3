@@ -7,6 +7,7 @@ enum StudentListControllerOutputMessage {
 
 final class StudentListController: UIViewController {
     
+    private var nextStudentID: Int = 11
     private let _outputPublisher = PassthroughSubject<StudentListControllerOutputMessage, Never>()
     
     var outputPublisher: AnyPublisher<StudentListControllerOutputMessage, Never> {
@@ -107,8 +108,9 @@ final class StudentListController: UIViewController {
     }
 
    private func addStudent(name: String, age: Int) {
-       let newStudent = Student(id: students.count + 1, name: name, age: age, subjects: [],
+       let newStudent = Student(id: nextStudentID, name: name, age: age, subjects: [],
                                 address: nil, scores: nil, hasScholarship: nil, graduationYear: nil)
+       nextStudentID += 1
        students.append(newStudent)
        tableView.reloadData()
    }
